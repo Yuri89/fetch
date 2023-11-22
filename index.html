@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <form action="" method="post" class="lista" id="form">
+            <label for="">nome<input type="text" name="nome" id="nome"></label>
+            <label for="">tipo usuario<input type="text" name="tipo_usuario" id="tipo_usuario"></label>
+            <label for="">sobrenome<input type="text" name="sobrenome" id="sobrenome"></label>
+            <label for="">telefone<input type="text" name="telefone" id="telefone"></label>
+            <label for="">email<input type="email" name="email" id="email"></label>
+            <label for="">senha<input type="password" name="senha" id="senha"></label>
+            <label for="">data ferias<input type="date" name="data_ferias" id="data_ferias"></label>
+            <label for="">designação<input type="text" name="designacao" id="designacao"></label>
+            <label for="">cidade<input type="text" name="cidade" id="cidade"></label>
+            <label for="">cidade<input type="text" name="estado" id="estado"></label>
+            <label for="">hora semanais<input type="time" name="horas_semanais" id="horas_semanais"></label>
+            <label for="">descrição<input type="text" name="descricao" id="descricao"></label>
+            <label for="">imagem<input type="file" name="imagem" id="imagem"></label>
+
+            <button type="submit">submit</button>
+        </form>
+    </div>
+</body>
+<script>
+    const form = document.getElementById('form')
+
+    form.addEventListener('submit',function(e){
+        e.preventDefault()
+
+        const preFormData = new FormData(form)
+        const formData = new URLSearchParams(preFormData)
+
+        console.log([...formData])
+        
+        fetch("http://127.0.0.1:8090/usuarios",{
+            method: "POST",
+            body: formData,
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
+        })
+</script>
+</html>
